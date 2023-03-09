@@ -1,0 +1,7 @@
+#db_config.ini
+[db_options]
+driver = SQL Server Native Client 11.0
+host = 127.0.0.1
+user = user
+password = 1
+dbname = db
