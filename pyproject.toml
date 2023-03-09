@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "mpi-autoproc"
+version = "0.1.0"
+description = ""
+authors = ["clfcg <leontev_dma@mail.ru>"]
+readme = "README.md"
+packages = [{include = "mpi_autoproc"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
