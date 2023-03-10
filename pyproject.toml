@@ -8,6 +8,8 @@ packages = [{include = "mpi_autoproc"}]
 
 [tool.poetry.dependencies]
 python = "^3.11"
+sqlalchemy = "^2.0.5.post1"
+pyodbc = "^4.0.35"
 
 
 [build-system]
