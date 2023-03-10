@@ -1,1 +1,3 @@
 config.ini
+logs.log
+__pycache__

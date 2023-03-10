@@ -4,12 +4,15 @@ from configparser import ConfigParser
 from sqlalchemy import Table, MetaData, create_engine, exc
 from sqlalchemy.orm import Session
 
-config_path = "mpi_autoproc/config.ini"
-conf = ConfigParser()
-conf.read(config_path)
+from log_collector import *
+
 
 def get_engine():
     try:
+        config_path = "mpi_autoproc/config.ini"
+        conf = ConfigParser()
+        conf.read(config_path)
+
         params = urllib.parse.quote_plus(
             f"DRIVER={conf['db_options']['driver']};"
             f"SERVER={conf['db_options']['host']};"
@@ -19,8 +22,9 @@ def get_engine():
             )
         engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
         conn = engine.connect()
+        get_log("Соединение установлено.")
         conn.close()
         return engine
     except exc.SQLAlchemyError as err:
-        print(err)
+        get_log(err)
         exit()
