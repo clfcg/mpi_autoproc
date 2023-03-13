@@ -36,7 +36,10 @@ def mpi_get_insurance_status_changes(dbeg: str, dend: str):
     stored_proc = session.execute(text(
         "exec mpi_getInsuranceStatusChanges :dbeg :dend"
     ), {"dbeg": dbeg, "dend": dend})
-    get_log(f"Процедура mpi_getInsuranceStatusChanges с параметрами {dbeg}, {dend} выполнена")
+    if stored_proc:
+        get_log(f"Процедура mpi_getInsuranceStatusChanges с параметрами {dbeg}, {dend} выполнена")
+    else:
+        get_log("Ошибка выполнения процедуры mpi_getInsuranceStatusChanges")
 
 
 def main():
