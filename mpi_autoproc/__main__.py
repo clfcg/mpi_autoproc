@@ -32,21 +32,17 @@ def get_engine():
 
 def mpi_get_insurance_status_changes(dbeg: str, dend: str):
     engine = get_engine()
-    session = Session(bind=engine)
-    stored_proc = session.execute(text(
-        "exec mpi_getInsuranceStatusChanges :dbeg :dend"
-    ), {"dbeg": dbeg, "dend": dend})
-    if stored_proc:
+    with engine.begin() as con:
+        stor_proc = con.execute(text(
+            "exec mpi_getInsuranceStatusChanges :dbeg, :dend"
+        ), {"dbeg": dbeg, "dend": dend})
         get_log(f"Процедура mpi_getInsuranceStatusChanges с параметрами {dbeg}, {dend} выполнена")
-    else:
-        get_log("Ошибка выполнения процедуры mpi_getInsuranceStatusChanges")
 
 
 def main():
     date_begin = (datetime.now() - timedelta(days=1)).strftime("%Y%m%d")
-    date_end = (datetime.now() - timedelta(days=1)).strftime("%Y%m%d")
+    date_end = datetime.now().strftime("%Y%m%d")
     mpi_get_insurance_status_changes(date_begin, date_end)
-    input("Обработка завершена...")
 
 
 if __name__ == "__main__":
