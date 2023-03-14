@@ -44,7 +44,7 @@ def mpi_get_insurance_status_changes(dbeg: str, dend: str):
 
 def main():
     date_begin = (datetime.now() - timedelta(days=1)).strftime("%Y%m%d")
-    date_end = datetime.now().strftime("%Y%m%d")
+    date_end = (datetime.now() - timedelta(days=1)).strftime("%Y%m%d")
     mpi_get_insurance_status_changes(date_begin, date_end)
     input("Обработка завершена...")
 
